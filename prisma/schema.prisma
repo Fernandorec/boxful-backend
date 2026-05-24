@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName   String
+  lastName    String
+  gender      String?
+  birthDate   DateTime?
+  email       String   @unique
+  phone       String
+  phoneCode   String   @default("503")
+  password    String
+  createdAt   DateTime @default(now())
+  orders      Order[]
+}
+
+model Order {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  orderNumber  String  @default(cuid())
+  userId             String    @db.ObjectId
+  user               User      @relation(fields: [userId], references: [id])
+  pickupAddress      String
+  scheduledDate      DateTime
+  recipientFirstName String
+  recipientLastName  String
+  recipientEmail     String?
+  recipientPhone     String
+  recipientAddress   String
+  department         String
+  municipality       String
+  reference          String?
+  instructions       String?
+  packages           Package[]
+  status             String    @default("pending")
+  isCOD              Boolean   @default(false)
+  expectedAmount     Float?
+  collectedAmount    Float?
+  shippingCost       Float?
+  commission         Float?
+  settlementAmount   Float?
+  createdAt          DateTime  @default(now())
+}
+
+model Package {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  orderId     String  @db.ObjectId
+  order       Order   @relation(fields: [orderId], references: [id])
+  content     String
+  weightLbs   Float
+  width       Float
+  height      Float
+  length      Float
+}
+
+model ShippingCost {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  dayOfWeek  Int    @unique
+  baseCost   Float
+}
