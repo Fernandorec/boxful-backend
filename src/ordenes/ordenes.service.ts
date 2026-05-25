@@ -31,7 +31,7 @@ export class OrdenesService {
         reference: dto.referencia,
         instructions: dto.indicaciones,
         isCOD: dto.esCOD ?? false,
-        expectedAmount: dto.montoEsperado,
+        expectedAmount: dto.montoEsperado ? parseFloat(String(dto.montoEsperado)) : null,
         shippingCost: costo,
         packages: {
           create: dto.paquetes.map((p) => ({
