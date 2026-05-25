@@ -29,9 +29,11 @@ npm install
 
 3. Crea el archivo `.env` en la raíz con estas variables:
 
+```
 DATABASE_URL="mongodb+srv://usuario:password@cluster.mongodb.net/boxful"
 JWT_SECRET="tu-clave-secreta"
 PORT=3001
+```
 
 4. Genera el cliente de Prisma:
 
