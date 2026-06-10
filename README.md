@@ -18,8 +18,8 @@ Backend de la aplicación Boxful — envíos ultra-rápidos para LatAm.
 1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/Fernandorec/boxful-api.git
-cd boxful-api
+git clone https://github.com/Fernandorec/boxful-backend.git
+cd boxful-backend
 ```
 
 2. Instala las dependencias:
